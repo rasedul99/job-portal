@@ -15,7 +15,48 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-console.log(uri);
+
+function verifyJWT(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).send({ message: "unauthorized access" });
+  }
+  const token = authHeader.split(" ")[1];
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
+    if (err) {
+      return res.status(403).send({ message: "Forbidden access" });
+    }
+    req.decoded = decoded;
+    next();
+  });
+}
+
+async function run() {
+  try {
+    console.log("Connected correctly to server");
+    const db = client.db("jobPortal");
+    const collection = db.collection("jobPosts");
+
+    // get all posts
+    app.get("/posts", verifyJWT, async (req, res) => {
+      const cursor = collection.find({});
+      const posts = await cursor.toArray();
+      res.send(posts);
+    });
+
+    // get a single post
+    app.get("/post/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const post = await collection.findOne(query);
+      res.send(post);
+    });
+  } finally {
+  }
+}
+run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("Job Portal Server Running!");
