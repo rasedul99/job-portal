@@ -9,7 +9,8 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv:// ${process.env.DB_USER}:${process.env.DB_PASS}@jobportal.ydluey6.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@jobportal.ydluey6.mongodb.net/?retryWrites=true&w=majority`;
+console.log(uri);
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -73,6 +74,7 @@ async function run() {
     // delete a single post
     app.delete("/deletePost/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(id);
       const query = { _id: ObjectId(id) };
       const result = await collection.deleteOne(query);
       res.send(result);
