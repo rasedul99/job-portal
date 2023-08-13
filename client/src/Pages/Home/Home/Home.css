@@ -1,0 +1,8 @@
+.homeImg {
+  width: 40%;
+}
+.homeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,7 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Typography, Grid } from "@mui/material";
+
+import { useState, useEffect } from "react";
+import ViewPostCard from "./ViewPostCard";
+import { AuthContext } from "./../../../contexts/AuthProvider";
 
 const ViewPost = () => {
-  return <div>ViewPost</div>;
+  const [posts, setPosts] = useState([]);
+  const { user, logOutUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/posts", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("job-token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return logOutUser();
+        }
+        return res.json();
+      })
+      .then((data) => setPosts(data));
+  }, [user?.email, logOutUser]);
+
+  return (
+    <div className="viewPost">
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12}>
+          <Typography
+            className="viewPostCard"
+            variant="h3"
+            align="center"
+            gutterBottom
+          >
+            View Posts
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        {posts &&
+          posts.length > 0 &&
+          posts.map((post) => <ViewPostCard post={post} key={post._id} />)}
+      </Grid>
+    </div>
+  );
 };
 
 export default ViewPost;
