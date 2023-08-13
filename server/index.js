@@ -66,6 +66,7 @@ async function run() {
     // get a single post
     app.get("/post/:id", async (req, res) => {
       const id = req.params.id;
+      console.log(id);
       const query = { _id: ObjectId(id) };
       const post = await collection.findOne(query);
       res.send(post);
@@ -74,12 +75,10 @@ async function run() {
     // delete a single post
     app.delete("/deletePost/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
-      const query = { _id: ObjectId(id) };
+      const query = { _id: new ObjectId(id) };
       const result = await collection.deleteOne(query);
       res.send(result);
     });
-
     // update a single post
     app.put("/updatePost/:id", async (req, res) => {
       const id = req.params.id;

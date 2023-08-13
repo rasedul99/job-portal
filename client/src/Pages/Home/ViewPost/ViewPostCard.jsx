@@ -27,6 +27,7 @@ const ViewPostCard = ({ post }) => {
   } = post;
 
   const handleDelete = (post) => {
+    console.log(post._id);
     const deletePost = window.confirm(
       `Are you sure you want to delete this post? ${post.postName}`
     );
