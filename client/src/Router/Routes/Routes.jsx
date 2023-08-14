@@ -54,7 +54,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/post/${params.id}`),
+          fetch(`https://job-portal-vh83.onrender.com/post/${params.id}`),
       },
       {
         path: "*",
