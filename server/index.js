@@ -67,7 +67,7 @@ async function run() {
     app.get("/post/:id", async (req, res) => {
       const id = req.params.id;
       console.log(id);
-      const query = { _id: ObjectId(id) };
+      const query = { _id: new ObjectId(id) };
       const post = await collection.findOne(query);
       res.send(post);
     });
@@ -82,7 +82,8 @@ async function run() {
     // update a single post
     app.put("/updatePost/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: ObjectId(id) };
+      console.log(id);
+      const query = { _id: new ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
         $set: {
@@ -98,6 +99,7 @@ async function run() {
         },
       };
       const result = await collection.updateOne(query, updateDoc, options);
+      console.log(result);
       res.send(result);
     });
   } finally {

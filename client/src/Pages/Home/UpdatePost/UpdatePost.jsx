@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 const UpdatePost = () => {
   const [updatedPost, setUpdatedPost] = useState({});
   const loadPost = useLoaderData();
+  console.log(loadPost);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
