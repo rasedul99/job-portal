@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
+import logo from "../../../Assets/logo.jpg";
 
 import { AuthContext } from "../../../contexts/AuthProvider";
 import toast from "react-hot-toast";
@@ -34,8 +35,7 @@ const Header = () => {
                 color="inherit"
                 aria-label="logo"
               >
-                {/* <img className="imgLogo" src={logo} alt="logo" /> */}
-                logo
+                <img className="imgLogo" src={logo} alt="logo" />
               </IconButton>
             </Link>
             <Typography

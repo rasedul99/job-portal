@@ -10,10 +10,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 
 const ViewPostCard = ({ post, handleDelete }) => {
-  // console.log(handleDelete);
-  // const [remainPost, setRemainPost] = useState([]);
-  // useEffect(() => {}, [setRemainPost]);
-
   const {
     _id,
     postName,
@@ -26,30 +22,6 @@ const ViewPostCard = ({ post, handleDelete }) => {
     jobBenefits,
     howToApply,
   } = post;
-
-  // const handleDelete = (post) => {
-  //   console.log(post._id);
-  //   const deletePost = window.confirm(
-  //     `Are you sure you want to delete this post? ${post.postName}`
-  //   );
-  //   if (deletePost) {
-  //     fetch(`http://localhost:5000/deletePost/${post._id}`, {
-  //       method: "DELETE",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((result) => {
-  //         if (result.deletedCount > 0) {
-  //           toast("Post deleted successfully");
-
-  //           // display remaining post
-  //           const remainingPost = remainPost.filter(
-  //             (remain) => remain._id !== post._id
-  //           );
-  //           setRemainPost(remainingPost);
-  //         }
-  //       });
-  //   }
-  // };
 
   return (
     <Grid item xs={12} md={6}>

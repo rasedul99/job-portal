@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import ViewPostCard from "./ViewPostCard";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 import toast from "react-hot-toast";
+
 const ViewPost = () => {
   const [posts, setPosts] = useState();
   const { user, logOutUser } = useContext(AuthContext);
@@ -54,12 +55,12 @@ const ViewPost = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Typography
-            className="viewPostCard"
+            style={{ padding: "20px 0" }}
             variant="h3"
             align="center"
             gutterBottom
           >
-            View Posts
+            Explore {posts?.length} Job Openings Ready for You
           </Typography>
         </Grid>
       </Grid>
